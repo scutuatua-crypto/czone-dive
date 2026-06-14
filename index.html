@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CZone Dive | Koh Tao Diving School</title>
+<meta name="description" content="Koh Tao SSI Dive School — Try Scuba, OW, AOW, Rescue, Divemaster, Fun Dive">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #03192E;
+    --ocean: #0A4D6E;
+    --reef: #0097B2;
+    --aqua: #00D4E8;
+    --foam: #B8F0F5;
+    --sand: #F5F0E8;
+    --white: #FFFFFF;
+    --coral: #FF6B4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--deep);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 2rem;
+    background: rgba(3,25,46,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,212,232,0.15);
+  }
+
+  .logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.3rem; font-weight: 900;
+    color: var(--aqua);
+    letter-spacing: -0.02em;
+  }
+
+  .logo span { color: var(--white); }
+
+  nav ul {
+    display: flex; gap: 2rem; list-style: none;
+  }
+
+  nav ul a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none; font-size: 0.85rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--aqua); }
+
+  .nav-cta {
+    background: var(--aqua); color: var(--deep) !important;
+    padding: 0.5rem 1.2rem; border-radius: 100px;
+    font-weight: 500 !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, #010f1d 0%, #03192E 60%, #051f36 100%);
+  }
+
+  .bubbles {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,151,178,0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,212,232,0.06) 0%, transparent 60%);
+  }
+
+  /* animated bubbles */
+  .bubble {
+    position: absolute; border-radius: 50%;
+    background: rgba(0,212,232,0.12);
+    border: 1px solid rgba(0,212,232,0.2);
+    animation: rise linear infinite;
+  }
+
+  @keyframes rise {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--aqua);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 900; line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .accent { color: var(--aqua); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255,255,255,0.65);
+    max-width: 480px; line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-depth {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900; color: rgba(0,212,232,0.05);
+    position: absolute; right: -2rem; bottom: 2rem;
+    letter-spacing: -0.05em; line-height: 1;
+    pointer-events: none; user-select: none;
+  }
+
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--aqua); color: var(--deep);
+    padding: 0.9rem 2rem; border-radius: 100px;
+    font-weight: 600; text-decoration: none;
+    font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,212,232,0.35);
+  }
+
+  .btn-outline {
+    border: 1px solid rgba(0,212,232,0.4); color: var(--aqua);
+    padding: 0.9rem 2rem; border-radius: 100px;
+    font-weight: 500; text-decoration: none;
+    font-size: 0.95rem; transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,212,232,0.1);
+    border-color: var(--aqua);
+  }
+
+  /* DEPTH LINE */
+  .depth-line {
+    width: 100%; padding: 1rem 2rem;
+    background: var(--ocean);
+    display: flex; gap: 3rem; overflow-x: auto;
+    border-top: 1px solid rgba(0,212,232,0.2);
+    border-bottom: 1px solid rgba(0,212,232,0.2);
+  }
+
+  .depth-stat {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: max-content;
+  }
+
+  .depth-stat strong {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.4rem; color: var(--aqua);
+  }
+
+  .depth-stat span { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 0.2rem; }
+
+  /* COURSES */
+  section { padding: 5rem 2rem; }
+
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--aqua);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .course-card {
+    background: rgba(10,77,110,0.3);
+    border: 1px solid rgba(0,212,232,0.15);
+    border-radius: 1.5rem; padding: 2rem;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+
+  .course-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--reef), var(--aqua));
+    opacity: 0; transition: opacity 0.2s;
+  }
+
+  .course-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,212,232,0.4);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  }
+
+  .course-card:hover::before { opacity: 1; }
+
+  .course-badge {
+    display: inline-block;
+    background: rgba(0,212,232,0.12);
+    color: var(--aqua); font-size: 0.7rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.8rem; border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .course-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .course-name-th {
+    font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    margin-bottom: 1rem;
+  }
+
+  .course-details {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .course-detail {
+    font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    display: flex; align-items: center; gap: 0.3rem;
+  }
+
+  .course-price {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.6rem; font-weight: 900; color: var(--white);
+  }
+
+  .course-price span {
+    font-size: 0.8rem; font-weight: 400;
+    color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif;
+  }
+
+  .course-price-th {
+    font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem;
+  }
+
+  /* HIGHLIGHT CARD */
+  .course-card.highlight {
+    background: linear-gradient(135deg, rgba(0,151,178,0.3), rgba(0,77,110,0.4));
+    border-color: rgba(0,212,232,0.4);
+  }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2rem; max-width: 1000px; margin: 0 auto;
+  }
+
+  .why-item { text-align: center; }
+
+  .why-icon {
+    font-size: 2.5rem; margin-bottom: 1rem;
+    display: block;
+  }
+
+  .why-item h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.95rem; margin-bottom: 0.5rem;
+  }
+
+  .why-item p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: linear-gradient(135deg, var(--ocean), var(--deep));
+    border-top: 1px solid rgba(0,212,232,0.2);
+    text-align: center;
+  }
+
+  .contact-grid {
+    display: flex; flex-wrap: wrap;
+    gap: 1.5rem; justify-content: center;
+    margin-top: 2.5rem;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,212,232,0.2);
+    border-radius: 1.2rem; padding: 1.5rem 2rem;
+    text-decoration: none; color: var(--white);
+    transition: all 0.2s; min-width: 180px;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+
+  .contact-card:hover {
+    background: rgba(0,212,232,0.1);
+    border-color: var(--aqua);
+    transform: translateY(-3px);
+  }
+
+  .contact-card .icon { font-size: 1.8rem; }
+  .contact-card .label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
+  .contact-card .value { font-weight: 500; font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 0.8rem; color: rgba(255,255,255,0.3);
+  }
+
+  footer strong { color: var(--aqua); }
+
+  /* DIVIDER */
+  .wave-divider {
+    width: 100%; overflow: hidden; line-height: 0;
+    background: var(--ocean);
+  }
+
+  /* MEDIA */
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    section { padding: 3.5rem 1.5rem; }
+    .depth-line { gap: 2rem; padding: 1rem 1.5rem; }
+    .hero-depth { font-size: 6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">C<span>Zone</span> Dive</div>
+  <ul>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="background: var(--deep);">
+  <div class="bubbles"></div>
+
+  <!-- animated bubbles -->
+  <div class="bubble" style="width:18px;height:18px;left:10%;animation-duration:8s;animation-delay:0s;"></div>
+  <div class="bubble" style="width:10px;height:10px;left:25%;animation-duration:11s;animation-delay:2s;"></div>
+  <div class="bubble" style="width:24px;height:24px;left:60%;animation-duration:9s;animation-delay:1s;"></div>
+  <div class="bubble" style="width:8px;height:8px;left:75%;animation-duration:13s;animation-delay:4s;"></div>
+  <div class="bubble" style="width:14px;height:14px;left:45%;animation-duration:10s;animation-delay:3s;"></div>
+
+  <p class="hero-eyebrow">🤿 Koh Tao, Thailand</p>
+  <h1>
+    Dive into<br>
+    <span class="accent">Koh Tao</span><br>
+    with us.
+  </h1>
+  <p class="hero-sub">
+    SSI courses for every level — beginner to professional.<br>
+    Based in Koh Tao, the diving capital of Thailand.
+  </p>
+  <div class="btn-group">
+    <a href="#courses" class="btn-primary">View Courses</a>
+    <a href="#contact" class="btn-outline">Contact</a>
+  </div>
+
+  <div class="hero-depth">DIVE</div>
+</section>
+
+<!-- STATS BAR -->
+<div class="depth-line">
+  <div class="depth-stat"><strong>7</strong><span>คอร์ส / Courses</span></div>
+  <div class="depth-stat"><strong>Koh Tao</strong><span>Thailand</span></div>
+  <div class="depth-stat"><strong>SSI</strong><span>Certified</span></div>
+  <div class="depth-stat"><strong>TH / EN</strong><span>ภาษาไทย & English</span></div>
+  <div class="depth-stat"><strong>Daily</strong><span>Open Every Day</span></div>
+</div>
+
+<!-- COURSES -->
+<section id="courses" style="background: var(--deep);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p class="section-label">All Courses</p>
+    <h2 class="section-title">Find Your Course.<br><span style="color:var(--aqua)">Find Your Dive.</span></h2>
+
+    <div class="courses-grid">
+
+      <div class="course-card">
+        <span class="course-badge">Beginner · วันเดียว</span>
+        <div class="course-name"><a href="courses/try-scuba.html" style="color:inherit;text-decoration:none;">Try Scuba</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 1 วัน</span>
+          <span class="course-detail">🤿 ไม่ต้องมีประสบการณ์</span>
+        </div>
+        <div class="course-price">฿2,500 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card highlight">
+        <span class="course-badge">⭐ Popular · OW</span>
+        <div class="course-name"><a href="courses/open-water.html" style="color:inherit;text-decoration:none;">Open Water Diver</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 3 วัน</span>
+          <span class="course-detail">🌊 5 ไดฟ์</span>
+        </div>
+        <div class="course-price">฿11,900 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card">
+        <span class="course-badge">Refresh · ฟื้นฟู</span>
+        <div class="course-name"><a href="courses/refresher.html" style="color:inherit;text-decoration:none;">Refresher</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 ครึ่งวัน</span>
+          <span class="course-detail">🌊 1 ไดฟ์</span>
+        </div>
+        <div class="course-price">฿2,100 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card">
+        <span class="course-badge">Advanced · AOW</span>
+        <div class="course-name"><a href="courses/advanced.html" style="color:inherit;text-decoration:none;">Advanced Open Water</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 2 วัน</span>
+          <span class="course-detail">🌊 5 ไดฟ์</span>
+        </div>
+        <div class="course-price">฿11,000 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card">
+        <span class="course-badge">Safety · EFR</span>
+        <div class="course-name"><a href="courses/efr.html" style="color:inherit;text-decoration:none;">Emergency First Response</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 1 วัน</span>
+          <span class="course-detail">🏥 ไม่มีไดฟ์</span>
+        </div>
+        <div class="course-price">฿4,000 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card">
+        <span class="course-badge">Rescue Diver</span>
+        <div class="course-name"><a href="courses/rescue.html" style="color:inherit;text-decoration:none;">Rescue Diver</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 2 วัน</span>
+          <span class="course-detail">🌊 4 ไดฟ์</span>
+        </div>
+        <div class="course-price">฿11,000 <span>/ คน</span></div>
+        
+      </div>
+
+      <div class="course-card highlight">
+        <span class="course-badge">🏆 Pro · Divemaster</span>
+        <div class="course-name"><a href="courses/divemaster.html" style="color:inherit;text-decoration:none;">Divemaster</a></div>
+        
+        <div class="course-details">
+          <span class="course-detail">📅 3–6 สัปดาห์</span>
+          <span class="course-detail">🏆 ระดับ Pro</span>
+        </div>
+        <div class="course-price">฿45,000 <span>/ คน</span></div>
+        
+      </div>
+
+
+      <div class="course-card">
+        <span class="course-badge">Fun · Explore</span>
+        <div class="course-name"><a href="courses/fun-dive.html" style="color:inherit;text-decoration:none;">Fun Dive</a></div>
+        <div class="course-details">
+          <span class="course-detail">🌊 2 Dives</span>
+          <span class="course-detail">✅ Need OW or above</span>
+        </div>
+        <div class="course-price">฿2,000 <span>/ person</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" style="background: linear-gradient(180deg, var(--deep) 0%, var(--ocean) 100%);">
+  <div style="max-width:900px;margin:0 auto;text-align:center;">
+    <p class="section-label">Why CZone Dive</p>
+    <h2 class="section-title" style="margin-bottom:3.5rem;">Dive With Us.<br><span style="color:var(--aqua)">No regrets.</span></h2>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <span class="why-icon">🌊</span>
+        <h3>Real Koh Tao</h3>
+        <p>Crystal clear water, stunning coral reefs — the Gulf of Thailand's best dive spots.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">🏅</span>
+        <h3>SSI Certified</h3>
+        <p>Internationally recognized certification, valid worldwide.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">🇹🇭</span>
+        <h3>English Instruction</h3>
+        <p>Professional instruction in English. Clear, safe, and fun.</p>
+      </div>
+      <div class="why-item">
+        <span class="why-icon">👨‍🏫</span>
+        <h3>Pro Instructors</h3>
+        <p>Years of experience diving Koh Tao. We've got you covered every step.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Ready to Dive?<br><span style="color:var(--aqua)">Get in touch. 🤿</span></h2>
+  <p style="color:rgba(255,255,255,0.5);font-size:0.95rem;">Our team is ready to answer all your questions.</p>
+
+  <div class="contact-grid">
+    <a href="https://www.facebook.com/" target="_blank" class="contact-card">
+      <span class="icon">📘</span>
+      <span class="label">Facebook</span>
+      <span class="value">CZone Dive</span>
+    </a>
+    <a href="https://www.instagram.com/" target="_blank" class="contact-card">
+      <span class="icon">📸</span>
+      <span class="label">Instagram</span>
+      <span class="value">@czonedive</span>
+    </a>
+    <a href="https://line.me/" target="_blank" class="contact-card">
+      <span class="icon">💬</span>
+      <span class="label">Line</span>
+      <span class="value">@czonedive</span>
+    </a>
+    <a href="https://wa.me/" target="_blank" class="contact-card">
+      <span class="icon">📱</span>
+      <span class="label">WhatsApp</span>
+      <span class="value">Chat Now</span>
+    </a>
+  </div>
+
+  <p style="margin-top:3rem;font-size:0.8rem;color:rgba(255,255,255,0.25);">
+    📍 Koh Tao, Surat Thani, Thailand
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>CZone Dive</strong> · Koh Tao Diving School · เกาะเต่า<br>
+  <span style="margin-top:0.5rem;display:block;">© 2025 CZone Dive. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
