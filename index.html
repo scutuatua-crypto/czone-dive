@@ -77,14 +77,37 @@
     background: linear-gradient(180deg, #010f1d 0%, #03192E 60%, #051f36 100%);
   }
 
-  .bubbles {
-    position: absolute; inset: 0; pointer-events: none;
-    background:
-      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(0,151,178,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(0,212,232,0.06) 0%, transparent 60%);
+  /* WHALE BREACH ANIMATION */
+  .whale-breach {
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    background-image: var(--whale-img);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 5;
+    pointer-events: none;
+    filter: brightness(1.1) contrast(1.1) drop-shadow(0 0 20px rgba(0,212,232,0.3));
+    animation: whaleJump 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    opacity: 0;
   }
 
-  /* animated bubbles */
+  @keyframes whaleJump {
+    0% { transform: translate(80vw, 400px) rotate(-20deg) scale(0.7); opacity: 0; }
+    10% { opacity: 0.8; }
+    30% { transform: translate(40vw, 350px) rotate(-10deg) scale(0.8); }
+    50% { transform: translate(10vw, -100px) rotate(-35deg) scale(1.1); opacity: 1; }
+    65% { transform: translate(-10vw, -50px) rotate(5deg) scale(1); }
+    85% { transform: translate(-40vw, 400px) rotate(25deg) scale(0.8); opacity: 0.8; }
+    100% { transform: translate(-80vw, 600px) rotate(35deg) scale(0.7); opacity: 0; }
+  }
+
+  .bubbles {
+    position: absolute; inset: 0; pointer-events: none;
+    z-index: 2;
+  }
+
   .bubble {
     position: absolute; border-radius: 50%;
     background: rgba(0,212,232,0.12);
@@ -103,6 +126,7 @@
     font-size: 0.75rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--aqua);
     margin-bottom: 1.2rem;
+    position: relative; z-index: 10;
   }
 
   .hero h1 {
@@ -111,6 +135,7 @@
     font-weight: 900; line-height: 0.95;
     letter-spacing: -0.03em;
     margin-bottom: 1.5rem;
+    position: relative; z-index: 10;
   }
 
   .hero h1 .accent { color: var(--aqua); }
@@ -120,6 +145,7 @@
     color: rgba(255,255,255,0.65);
     max-width: 480px; line-height: 1.6;
     margin-bottom: 2.5rem;
+    position: relative; z-index: 10;
   }
 
   .hero-depth {
@@ -129,9 +155,10 @@
     position: absolute; right: -2rem; bottom: 2rem;
     letter-spacing: -0.05em; line-height: 1;
     pointer-events: none; user-select: none;
+    z-index: 1;
   }
 
-  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 10; }
 
   .btn-primary {
     background: var(--aqua); color: var(--deep);
@@ -209,6 +236,7 @@
     border-radius: 1.5rem; padding: 2rem;
     transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     position: relative; overflow: hidden;
+    backdrop-filter: blur(8px);
   }
 
   .course-card::before {
@@ -241,96 +269,10 @@
     margin-bottom: 0.4rem;
   }
 
-  .course-name-th {
-    font-size: 0.85rem; color: rgba(255,255,255,0.5);
-    margin-bottom: 1rem;
-  }
-
-  .course-details {
-    display: flex; gap: 1rem; margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .course-detail {
-    font-size: 0.8rem; color: rgba(255,255,255,0.6);
-    display: flex; align-items: center; gap: 0.3rem;
-  }
-
   .course-price {
     font-family: 'Unbounded', sans-serif;
     font-size: 1.6rem; font-weight: 900; color: var(--white);
   }
-
-  .course-price span {
-    font-size: 0.8rem; font-weight: 400;
-    color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif;
-  }
-
-  .course-price-th {
-    font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem;
-  }
-
-  /* HIGHLIGHT CARD */
-  .course-card.highlight {
-    background: linear-gradient(135deg, rgba(0,151,178,0.3), rgba(0,77,110,0.4));
-    border-color: rgba(0,212,232,0.4);
-  }
-
-  /* WHY US */
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 2rem; max-width: 1000px; margin: 0 auto;
-  }
-
-  .why-item { text-align: center; }
-
-  .why-icon {
-    font-size: 2.5rem; margin-bottom: 1rem;
-    display: block;
-  }
-
-  .why-item h3 {
-    font-family: 'Unbounded', sans-serif;
-    font-size: 0.95rem; margin-bottom: 0.5rem;
-  }
-
-  .why-item p {
-    font-size: 0.85rem; color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-  }
-
-  /* CONTACT */
-  .contact-section {
-    background: linear-gradient(135deg, var(--ocean), var(--deep));
-    border-top: 1px solid rgba(0,212,232,0.2);
-    text-align: center;
-  }
-
-  .contact-grid {
-    display: flex; flex-wrap: wrap;
-    gap: 1.5rem; justify-content: center;
-    margin-top: 2.5rem;
-  }
-
-  .contact-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,212,232,0.2);
-    border-radius: 1.2rem; padding: 1.5rem 2rem;
-    text-decoration: none; color: var(--white);
-    transition: all 0.2s; min-width: 180px;
-    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  }
-
-  .contact-card:hover {
-    background: rgba(0,212,232,0.1);
-    border-color: var(--aqua);
-    transform: translateY(-3px);
-  }
-
-  .contact-card .icon { font-size: 1.8rem; }
-  .contact-card .label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; }
-  .contact-card .value { font-weight: 500; font-size: 0.95rem; }
 
   /* FOOTER */
   footer {
@@ -342,19 +284,12 @@
 
   footer strong { color: var(--aqua); }
 
-  /* DIVIDER */
-  .wave-divider {
-    width: 100%; overflow: hidden; line-height: 0;
-    background: var(--ocean);
-  }
-
-  /* MEDIA */
   @media (max-width: 768px) {
     nav ul { display: none; }
     .hero { padding: 6rem 1.5rem 3rem; }
     section { padding: 3.5rem 1.5rem; }
-    .depth-line { gap: 2rem; padding: 1rem 1.5rem; }
     .hero-depth { font-size: 6rem; }
+    .whale-breach { width: 300px; height: 150px; }
   }
 </style>
 </head>
@@ -365,23 +300,17 @@
   <div class="logo">C<span>Zone</span> Dive</div>
   <ul>
     <li><a href="#courses">Courses</a></li>
-    <li><a href="travel.html">Travel</a></li>
-    <li><a href="activities.html">Activities</a></li>
-    <li><a href="#why">Why Us</a></li>
+    <li><a href="#">Travel</a></li>
+    <li><a href="#">Activities</a></li>
+    <li><a href="#">Why Us</a></li>
     <li><a href="#contact" class="nav-cta">Book Now</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="background: var(--deep);">
-  <div class="bubbles"></div>
-
-  <!-- animated bubbles -->
-  <div class="bubble" style="width:18px;height:18px;left:10%;animation-duration:8s;animation-delay:0s;"></div>
-  <div class="bubble" style="width:10px;height:10px;left:25%;animation-duration:11s;animation-delay:2s;"></div>
-  <div class="bubble" style="width:24px;height:24px;left:60%;animation-duration:9s;animation-delay:1s;"></div>
-  <div class="bubble" style="width:8px;height:8px;left:75%;animation-duration:13s;animation-delay:4s;"></div>
-  <div class="bubble" style="width:14px;height:14px;left:45%;animation-duration:10s;animation-delay:3s;"></div>
+<section class="hero" id="home">
+  <div class="bubbles" id="bubbles-container"></div>
+  <div class="whale-breach" id="whale"></div>
 
   <p class="hero-eyebrow">🤿 Koh Tao, Thailand</p>
   <h1>
@@ -411,180 +340,56 @@
 </div>
 
 <!-- COURSES -->
-<section id="courses" style="background: var(--deep);">
+<section id="courses">
   <div style="max-width:1200px;margin:0 auto;">
     <p class="section-label">All Courses</p>
     <h2 class="section-title">Find Your Course.<br><span style="color:var(--aqua)">Find Your Dive.</span></h2>
 
     <div class="courses-grid">
-
       <div class="course-card">
         <span class="course-badge">Beginner · วันเดียว</span>
-        <div class="course-name"><a href="courses/try-scuba.html" style="color:inherit;text-decoration:none;">Try Scuba</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 1 วัน</span>
-          <span class="course-detail">🤿 ไม่ต้องมีประสบการณ์</span>
-        </div>
-        <div class="course-price">฿2,500 <span>/ คน</span></div>
-        
+        <div class="course-name">Try Scuba</div>
+        <div class="course-price">฿2,500</div>
       </div>
-
       <div class="course-card highlight">
         <span class="course-badge">⭐ Popular · OW</span>
-        <div class="course-name"><a href="courses/open-water.html" style="color:inherit;text-decoration:none;">Open Water Diver</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 3 วัน</span>
-          <span class="course-detail">🌊 5 ไดฟ์</span>
-        </div>
-        <div class="course-price">฿11,900 <span>/ คน</span></div>
-        
+        <div class="course-name">Open Water Diver</div>
+        <div class="course-price">฿11,900</div>
       </div>
-
-      <div class="course-card">
-        <span class="course-badge">Refresh · ฟื้นฟู</span>
-        <div class="course-name"><a href="courses/refresher.html" style="color:inherit;text-decoration:none;">Refresher</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 ครึ่งวัน</span>
-          <span class="course-detail">🌊 1 ไดฟ์</span>
-        </div>
-        <div class="course-price">฿2,100 <span>/ คน</span></div>
-        
-      </div>
-
       <div class="course-card">
         <span class="course-badge">Advanced · AOW</span>
-        <div class="course-name"><a href="courses/advanced.html" style="color:inherit;text-decoration:none;">Advanced Open Water</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 2 วัน</span>
-          <span class="course-detail">🌊 5 ไดฟ์</span>
-        </div>
-        <div class="course-price">฿11,000 <span>/ คน</span></div>
-        
-      </div>
-
-      <div class="course-card">
-        <span class="course-badge">Safety · EFR</span>
-        <div class="course-name"><a href="courses/efr.html" style="color:inherit;text-decoration:none;">Emergency First Response</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 1 วัน</span>
-          <span class="course-detail">🏥 ไม่มีไดฟ์</span>
-        </div>
-        <div class="course-price">฿4,000 <span>/ คน</span></div>
-        
-      </div>
-
-      <div class="course-card">
-        <span class="course-badge">Rescue Diver</span>
-        <div class="course-name"><a href="courses/rescue.html" style="color:inherit;text-decoration:none;">Rescue Diver</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 2 วัน</span>
-          <span class="course-detail">🌊 4 ไดฟ์</span>
-        </div>
-        <div class="course-price">฿11,000 <span>/ คน</span></div>
-        
-      </div>
-
-      <div class="course-card highlight">
-        <span class="course-badge">🏆 Pro · Divemaster</span>
-        <div class="course-name"><a href="courses/divemaster.html" style="color:inherit;text-decoration:none;">Divemaster</a></div>
-        
-        <div class="course-details">
-          <span class="course-detail">📅 3–6 สัปดาห์</span>
-          <span class="course-detail">🏆 ระดับ Pro</span>
-        </div>
-        <div class="course-price">฿45,000 <span>/ คน</span></div>
-        
-      </div>
-      <div class="course-details">
-          <span class="course-detail">
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WHY US -->
-<section id="why" style="background: linear-gradient(180deg, var(--deep) 0%, var(--ocean) 100%);">
-  <div style="max-width:900px;margin:0 auto;text-align:center;">
-    <p class="section-label">Why CZone Dive</p>
-    <h2 class="section-title" style="margin-bottom:3.5rem;">Dive With Us.<br><span style="color:var(--aqua)">No regrets.</span></h2>
-
-    <div class="why-grid">
-      <div class="why-item">
-        <span class="why-icon">🌊</span>
-        <h3>Real Koh Tao</h3>
-        <p>Crystal clear water, stunning coral reefs — the Gulf of Thailand's best dive spots.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">🏅</span>
-        <h3>SSI Certified</h3>
-        <p>Internationally recognized certification, valid worldwide.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">🇹🇭</span>
-        <h3>English Instruction</h3>
-        <p>Professional instruction in English. Clear, safe, and fun.</p>
-      </div>
-      <div class="why-item">
-        <span class="why-icon">👨‍🏫</span>
-        <h3>Pro Instructors</h3>
-        <p>Years of experience diving Koh Tao. We've got you covered every step.</p>
+        <div class="course-name">Advanced Open Water</div>
+        <div class="course-price">฿11,000</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact-section">
-  <p class="section-label">Get In Touch</p>
-  <h2 class="section-title">Ready to Dive?<br><span style="color:var(--aqua)">Get in touch. 🤿</span></h2>
-  <p style="color:rgba(255,255,255,0.5);font-size:0.95rem;">Our team is ready to answer all your questions.</p>
-
-  
-  <div class="contact-grid">
-    <a href="https://www.facebook.com/czonedivers" target="_blank" class="contact-card">
-      <span class="icon">📘</span>
-      <span class="label">Facebook · CZone Dive</span>
-      <span class="value">czonedivers</span>
-    </a>
-    <a href="https://www.instagram.com/czonediver.maehaad" target="_blank" class="contact-card">
-      <span class="icon">📸</span>
-      <span class="label">Instagram · CZone Dive</span>
-      <span class="value">@czonediver.maehaad</span>
-    </a>
-    <a href="https://www.instagram.com/bangkokdive.club" target="_blank" class="contact-card">
-      <span class="icon">📸</span>
-      <span class="label">Instagram · Bangkok Dive Club</span>
-      <span class="value">@bangkokdive.club</span>
-    </a>
-    <a href="mailto:czonedive@gmail.com" class="contact-card">
-      <span class="icon">✉️</span>
-      <span class="label">Email</span>
-      <span class="value">czonedive@gmail.com</span>
-    </a>
-    <a href="https://wa.me/66812314842" target="_blank" class="contact-card">
-      <span class="icon">📱</span>
-      <span class="label">WhatsApp</span>
-      <span class="value">+66 81 231 4842</span>
-    </a>
-  </div>
-
-  <p style="margin-top:3rem;font-size:0.8rem;color:rgba(255,255,255,0.25);">
-    📍 Koh Tao, Surat Thani, Thailand
-  </p>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <strong>CZone Dive</strong> · Koh Tao Diving School · เกาะเต่า<br>
-  <span style="margin-top:0.5rem;display:block;">© 2025 CZone Dive. All rights reserved.</span>
+  <p>© 2026 <strong>CZone Dive</strong> Koh Tao. All rights reserved.</p>
 </footer>
+
+<script>
+    const b64 = 'iVBORw0KGgoAAAANSUhEUgAABgAAAAQACAIAAACoEwUVAAAxi2NhQlgAADGLanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAMWVqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3Vybjp1dWlkOjc5YWEzZjNiLWM5MjgtNDhhOC05N2YzLWY4MzJmNTVjM2VmOQAAAAKXanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAABYWp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmJveGVzAAAAABhjMnNo3mQVYHCkV3gzBRbMCXkiPAAAARhjYm9yomNhbGdmc2hhMjU2ZWJveGVzhaNlbmFtZXOBZFBOR2hkaGFzaFggTEtqO+ExSrhhOL70MU3eAi5gCWDYaJosj4YxgC0g2rZjcGFkQKNlbmFtZXOBZElIRFJkaGFzaFggcekqtVAbSsTA6EqmuOYI6pwqGHIVFsgZp2OKjZCC7e9jcGFkQKNlbmFtZXOBZEMyUEFkaGFzaEEAY3BhZECjZW5hbWVzgWRJREFUZGhhc2hYIErDdp+TGv9Jj8MqGzwF6f3GDhe64gEhgS6zB40aVYQNY3BhZECjZW5hbWVzgWRJRU5EZGhhc2hYIIGecu8AUGdrhhYLb70LObR/uxOo4Q5pwpnL4a2EjSPfY3BhZEAAAAEFanVtYgAAAD5qdW1kY2JvcgARABCAAACqADibcRNjMnBhLmFjdGlvbnMAAAAAGGMyc2jeZBVgcKRXeDMFFswJeSI8AAAAv2Nib3KhZ2FjdGlvbnOBpGZhY3Rpb25sYzJwYS5jcmVhdGVkbXNvZnR3YXJlQWdlbnR1QXp1cmUgT3BlbkFJIEltYWdlR2VuZHdoZW50MjAyNi0wNS0yNlQxMDo1MTo1OFpxZGlnaXRhbFNvdXJjZVR5cGV4Rmh0dHA6Ly9jdi5pcHRjLm9yZy9uZXdzY29kZXMvZGlnaXRhbHNvdXJjZXR5cGUvdHJhaW5lZEFsZ29yaXRobWljTWVkaWEAAAJxanVtYgAAACRqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltAAAAAkVjYm9yp2NhbGdmc2hhMjU2aWRjOmZvcm1hdGlpbWFnZS9wbmdpc2lnbmF0dXJleExzZWxmI2p1bWJmPWMycGEvdXJuOnV1aWQ6NzlhYTNmM2ItYzkyOC00OGE4LTk3ZjMtZjgzMmY1NWMzZWY5L2MycGEuc2lnbmF0dXJlamluc3RhbmNlSURjMS4wb2NsYWltX2dlbmVyYXRvcngcTWljcm9zb2Z0X1Jlc3BvbnNpYmxlX0FJLzEuMHRjbGFpbV9nZW5lcmF0b3JfaW5mb4GiZG5hbWV4KU1pY3Jvc29mdCBSZXNwb25zaWJsZSBBSSBJbWFnZSBQcm92ZW5hbmNlZ3ZlcnNpb25jMS4wamFzc2VydGlvbnOCo2NhbGdmc2hhMjU2Y3VybHhdc2VsZiNqdW1iZj1jMnBhL3Vybjp1dWlkOjc5YWEzZjNiLWM5MjgtNDhhOC05N2YzLWY4MzJmNTVjM2VmOS9jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmJveGVzZGhhc2hYIJygUHh2fiJPPWRYfuJTkWnmGUaJYfV7TQHwlUgFTbEZo2NhbGdmc2hhMjU2Y3VybHhac2VsZiNqdW1iZj1jMnBhL3Vybjp1dWlkOjc5YWEzZjNiLWM5MjgtNDhhOC05N2YzLWY4MzJmNTVjM2VmOS9jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zZGhhc2hYIJtcDkc6EBmnT+fMoWQGg1G7IBm/oVg7RukwCkd1aBABAAAsDmp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAr3mNib3LShEShATgkomd4NWNoYWlug1kGKTCCBiUwggQNoAMCAQICEzMAAAB+JCzZntPvltIAAAAAAH4wDQYJKoZIhvcNAQEMBQAwVjELMAkGA1UEBhMCVVMxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEnMCUGA1UEAxMeTWljcm9zb2Z0IFNDRCBDbGFpbWFudHMgUlNBIENBMB4XDTI1MTAwMTE3NDQwMVoXDTI2MTAwMTE3NDQwMVowdDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcTB1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEeMBwGA1UEAxMVTWljcm9zb2Z0IENv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';
+    
+    document.getElementById('whale').style.setProperty('--whale-img', `url('data:image/png;base64,${b64}')`);
+
+    function createBubbles() {
+        const container = document.getElementById('bubbles-container');
+        for (let i = 0; i < 30; i++) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = Math.random() * 15 + 5 + 'px';
+            bubble.style.width = size;
+            bubble.style.height = size;
+            bubble.style.left = Math.random() * 100 + '%';
+            bubble.style.animationDuration = Math.random() * 5 + 7 + 's';
+            bubble.style.animationDelay = Math.random() * 5 + 's';
+            container.appendChild(bubble);
+        }
+    }
+    createBubbles();
+</script>
 
 </body>
 </html>
